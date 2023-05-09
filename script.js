@@ -1,36 +1,35 @@
-// Crie uma função construtora de Pessoas
-// Deve conter nome, sobrenome e idade
-// Crie um método no protótipo que retorne
-// o nome completo da pessoa
-function Pessoa(nome, sobrenome, idade) {
-  this.nome = nome;
-  this.sobrenome = sobrenome;
-  this.idade = idade;
+// Retorne um número aleatório
+// entre 1050 e 2000
+const aleatorio = Math.floor(Math.random() * (2000 - 1050 + 1) + 1050);
+console.log(aleatorio);
+
+// Retorne o maior número da lista abaixo
+const numeros = '4, 5, 20, 8, 9';
+const arrayNumeros = numeros.split(', ');
+const numeroMaximo = Math.max(...arrayNumeros);
+console.log(numeroMaximo);
+
+// Crie uma função para limpar os preços
+// e retornar os números com centavos arredondados
+// depois retorne a soma total
+const listaPrecos = ['R$ 59,99', ' R$ 100,222', 'R$ 230  ', 'r$  200'];
+
+function limparPreco(preco) {
+  preco = +preco
+    .toString()
+    .toUpperCase()
+    .replace('R$', '')
+    .trim()
+    .replace(',', '.');
+  preco = +preco.toFixed(2);
+
+  return preco;
 }
-Pessoa.prototype.nomeCompleto = function () {
-  return `${this.nome} ${this.sobrenome}`;
-};
-const nathalia = new Pessoa('Nathália', 'Sardou', 25);
-//nathalia.nomeComplet0() = "Nathália Sardou"
-
-// Liste os métodos acessados por
-// dados criados com NodeList,
-// HTMLCollection, Document
-
-object.getOwnPropertyNames(NodeList.prototype);
-object.getOwnPropertyNames(HTMLAllCollection.prototype);
-object.getOwnPropertyNames(Document.prototype);
-
-// Liste os construtores dos dados abaixo
-const li = document.querySelector('li');
-
-li; //HTMLElement
-li.click; //Function
-li.innerText; //String
-li.value; //number
-li.hidden; //boolean
-li.offsetLeft; //number
-li.click(); //undefined
-
-// Qual o construtor do dado abaixo:
-li.hidden.constructor.name; //String
+let soma = 0;
+listaPrecos.forEach((preco) => {
+  soma += limparPreco(preco);
+});
+console.log(
+  soma.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
+);
+limparPreco([1]);
