@@ -1,69 +1,34 @@
-// Selecione cada curso e retorne uma array
-// com objetos contendo o título, descricao,
-// aulas e horas de cada curso
-const cursos = document.querySelectorAll('.curso');
-const arrayCursos = Array.from(cursos);
+// Retorne a soma total de caracteres dos
+// parágrafos acima utilizando reduce
+const paragrafos = document.querySelectorAll('p');
 
-const objetosCursos = arrayCursos.map((curso) => {
-  const titulo = curso.querySelector('h1').innerText;
-  const descricao = curso.querySelector('p').innerText;
-  const aulas = curso.querySelector('.aulas').innerText;
-  const horas = curso.querySelector('.horas').innerText;
-  return {
-    titulo,
-    descricao,
-    aulas,
-    horas,
-  };
-});
-console.log(objetosCursos);
-console.log(arrayCursos);
+const totalCaracteres = Array.prototype.reduce.call(
+  paragrafos,
+  (acumulador, item) => {
+    return acumulador + item.innerText.length;
+  },
+  0,
+);
+console.log(totalCaracteres);
 
-// Retorne uma lista com os
-// números maiores que 100
-let guardaValores;
-const numeros = [3, 44, 333, 23, 122, 322, 33];
-let maioresQCem = numeros.filter((n) => n > 100);
-console.log(maioresQCem);
-// Verifique se Baixo faz parte
-// da lista de instrumentos e retorne true
-const instrumentos = ['Guitarra', 'Baixo', 'Bateria', 'Teclado'];
-let possui = instrumentos.some((item) => {
-  return item === 'Baixo';
-});
-console.log(possui);
+// Crie uma função que retorne novos elementos
+// html, com os seguintes parâmetros
+// tag, classe e conteudo.
 
-// Retorne o valor total das compras
-const compras = [
-  {
-    item: 'Banana',
-    preco: 'R$ 4,99',
-  },
-  {
-    item: 'Ovo',
-    preco: 'R$ 2,99',
-  },
-  {
-    item: 'Carne',
-    preco: 'R$ 25,49',
-  },
-  {
-    item: 'Refrigerante',
-    preco: 'R$ 5,35',
-  },
-  {
-    item: 'Quejo',
-    preco: 'R$ 10,60',
-  },
-];
-let totalCompras;
-let limpaPreco;
-totalCompras = compras.reduce((acumulador, item) => {
-  limpaPreco = +item.preco
-    .toString()
-    .replace('R$', '')
-    .replace(',', '.')
-    .trim();
-  return acumulador + limpaPreco;
-}, 0);
-console.log(totalCompras);
+function criarElemento(tag, classe, conteudo) {
+  const elemento = document.createElement(tag);
+  classe ? elemento.classList.add(classe) : null;
+  conteudo ? (elemento.innerHTML = conteudo) : null;
+  return elemento;
+}
+console.log(criarElemento('li', 'azul', 'esse é o conteúdo'));
+
+// Crie uma nova função utilizando a anterior como base
+// essa nova função deverá sempre criar h1 com a
+// classe titulo. Porém o parâmetro conteudo continuará dinâmico
+const h1Titulo = criarElemento.bind(null, 'h1', 'titulo');
+
+const cursosJS = h1Titulo('Cursos de JavaScript');
+const cursosHTML = h1Titulo('Cursos de HTML');
+
+console.log(cursosJS, cursosHTML);
